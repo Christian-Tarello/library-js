@@ -1,7 +1,8 @@
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, subtitle, author, pages, read) {
 	this.title = title;
+	this.subtitle = subtitle;
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
