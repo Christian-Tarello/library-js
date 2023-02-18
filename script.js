@@ -1,3 +1,6 @@
+const libraryContainer = document.querySelector(".cardsGrid");
+const addBookForm = document.querySelector(".popUpForm");
+
 let myLibrary = [];
 
 function Book(title, subtitle, author, pages, read) {
@@ -54,6 +57,21 @@ function displayBooks(bookList, container) {
 	});
 }
 
-function addBookToLibrary() {
-
+function addBookToLibrary(formData) {
+	const newBook = new Book(
+		formData.get("title"),
+		formData.get("subtitle"),
+		formData.get("author"),
+		formData.get("pages"),
+		(formData.get("isRead") != null)
+		);
+	myLibrary.push(newBook);
 }
+
+addBookForm.addEventListener('submit', (e) => {
+	const formData = new FormData(e.target);
+	e.target.classList.toggle("popUpForm--hidden");
+	addBookToLibrary(formData);
+	displayBooks(myLibrary, libraryContainer);
+	e.preventDefault();
+})
