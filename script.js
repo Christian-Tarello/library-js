@@ -78,6 +78,10 @@ addBookForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 });
 
+addBookForm.addEventListener('click', (e) => {
+	e.stopPropagation();
+});
+
 addBookButton.addEventListener('click', () => {
 	addBookForm.reset();
 	addBookForm.classList.toggle("popUpForm--hidden");
