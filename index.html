@@ -66,43 +66,45 @@
                 </div>
         </div>
     </main>
-    <form class="popUpForm popUpForm--hidden" action="" method="post">
-        <div class="popUpForm-title">Add a new book:</div>
-        <fieldset class="popUpForm-fieldset">
-            <legend class="popUpForm-legend">Book Elements</legend>
-            <ul class="popUpForm-fieldList">
-                <li class="popUpForm-field">
-                    <label for="bookTitle">Title:</label>
-                    <input id="bookTitle" name="title" type="text">
-                </li>
-                <li class="popUpForm-field">
-                    <label for="bookSubtitle">Subtitle:</label>
-                    <input id="bookSubtitle" name="subtitle" type="text">
-                </li>
-                <li class="popUpForm-field">
-                    <label for="bookAuthor">Author/Studio name:</label>
-                    <input id="bookAuthor" name="author" type="text">
-                </li>
-                <li class="popUpForm-field">
-                    <label for="bookPages">Pages in book:</label>
-                    <input id="bookPages" name="pages" type="number" >
-                </li>
-            </ul>
-        </fieldset>
-        <fieldset class="popUpForm-fieldset">
-            <legend class="popUpForm-legend">Book Metadata</legend>
-            <ul class="popUpForm-fieldList">
-                <li class="popUpForm-field">
-                    <label for="bookPath">Book Path:</label>
-                    <input id="bookPath" name="path" type="text">
-                </li>
-                <li class="popUpForm-field popUpForm-field--checkbox">
-                    <input id="bookRead" name="isRead" type="checkbox">
-                    <label for="bookRead">Read?</label>
-                </li>
-            </ul>
-        </fieldset>
-        <button class="popUpForm-submit" type="submit">Add Book</button>
-    </form>
+    <div class="popUpForm-wrapper">
+        <form class="popUpForm popUpForm--hidden" action="" method="post">
+            <div class="popUpForm-title">Add a new book:</div>
+            <fieldset class="popUpForm-fieldset">
+                <legend class="popUpForm-legend">Book Elements</legend>
+                <ul class="popUpForm-fieldList">
+                    <li class="popUpForm-field">
+                        <label for="bookTitle">Title:</label>
+                        <input id="bookTitle" name="title" type="text">
+                    </li>
+                    <li class="popUpForm-field">
+                        <label for="bookSubtitle">Subtitle:</label>
+                        <input id="bookSubtitle" name="subtitle" type="text">
+                    </li>
+                    <li class="popUpForm-field">
+                        <label for="bookAuthor">Author/Studio name:</label>
+                        <input id="bookAuthor" name="author" type="text">
+                    </li>
+                    <li class="popUpForm-field">
+                        <label for="bookPages">Pages in book:</label>
+                        <input id="bookPages" name="pages" type="number" >
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset class="popUpForm-fieldset">
+                <legend class="popUpForm-legend">Book Metadata</legend>
+                <ul class="popUpForm-fieldList">
+                    <li class="popUpForm-field">
+                        <label for="bookPath">Book Path:</label>
+                        <input id="bookPath" name="path" type="text">
+                    </li>
+                    <li class="popUpForm-field popUpForm-field--checkbox">
+                        <input id="bookRead" name="isRead" type="checkbox">
+                        <label for="bookRead">Read?</label>
+                    </li>
+                </ul>
+            </fieldset>
+            <button class="popUpForm-submit" type="submit">Add Book</button>
+        </form>
+    </div>
 </body>
 </html>

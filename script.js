@@ -1,5 +1,7 @@
 const libraryContainer = document.querySelector(".cardsGrid");
 const addBookForm = document.querySelector(".popUpForm");
+const formWrapper = document.querySelector(".popUpForm-wrapper");
+const addBookButton = document.querySelector(".primaryHeader-navButton--addBook");
 
 let myLibrary = [];
 
@@ -74,4 +76,13 @@ addBookForm.addEventListener('submit', (e) => {
 	addBookToLibrary(formData);
 	displayBooks(myLibrary, libraryContainer);
 	e.preventDefault();
+});
+
+addBookButton.addEventListener('click', () => {
+	addBookForm.reset();
+	addBookForm.classList.toggle("popUpForm--hidden");
+})
+
+formWrapper.addEventListener('click', () => {
+	addBookForm.classList.add("popUpForm--hidden")
 })

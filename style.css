@@ -40,6 +40,22 @@ body {
     cursor: pointer;
 }
 
+.popUpForm-wrapper {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.popUpForm-wrapper:has(.popUpForm--hidden) {
+    display: none;
+}
+
+.popUpForm-wrapper:not(:has(.popUpForm--hidden)) {
+    background-color: #eeeeee22;
+}
+
 .popUpForm {
     display: flex;
     position: fixed;
