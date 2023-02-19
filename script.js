@@ -20,6 +20,7 @@ Book.prototype.toDomElement = function () {
 			<button type="button" class="bookCard-tag">D</button>
 		</div>
 		<div class="bookCard-shape">
+			<div class="bookCard-readMarker">✔</div>
 			<div class="bookCard-spine"></div>
 			<div class="bookCard-content">
 				<div class="bookCard-name">

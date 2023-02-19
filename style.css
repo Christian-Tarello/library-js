@@ -181,7 +181,10 @@ body {
     --bookCard-coverHeight: 15rem;
     --bookCard-spineWidth: 2.5rem;
     --bookCard-tagWidth: 1.75rem;
-    --bookCard-tagHeight: 1.75rem; 
+    --bookCard-tagHeight: 1.75rem;
+    --bookCard-readMarkerSize: 3rem;
+    --bookCard-readMarkerColor: green;
+    --bookCard-readMarkerTextColor: #eee;
     --bookCard-edgeCoverHeight: 0.5rem;
     --bookCard-edgePagesHeight: 1.5rem;
     --bookCard-baseSpaceUnit: 0.5rem;
@@ -302,4 +305,32 @@ body {
     .bookCard-tag:hover {
         transform: translateX(0%);
     }
+}
+
+.bookCard-readMarker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: var(--bookCard-readMarkerSize);
+    width: var(--bookCard-readMarkerSize);
+    background-color: var(--bookCard-readMarkerColor);
+    color: var(--bookCard-readMarkerTextColor);
+    font-size: calc(var(--bookCard-readMarkerSize) / 2);
+    padding: calc(var(--bookCard-readMarkerSize) / 3)
+             calc(var(--bookCard-readMarkerSize) / 3)
+             calc(var(--bookCard-readMarkerSize) / 3 * 2)
+             calc(var(--bookCard-readMarkerSize) / 3 * 2);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+    line-height: calc(var(--bookCard-readMarkerSize) / 2);
+}
+
+.bookCard .bookCard-readMarker {
+    display: none;
+}
+
+.bookCard--read .bookCard-readMarker {
+    display: flex;
 }
