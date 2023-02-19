@@ -41,7 +41,6 @@ body {
 }
 
 .popUpForm-wrapper {
-    display: none;
     background-color: #eeeeee22;
     position: fixed;
     height: 100%;
@@ -50,8 +49,8 @@ body {
     left: 0;
 }
 
-.popUpForm--hidden {
-    display: initial;
+.popUpForm-wrapper--hidden {
+    display: none;
 }
 
 .popUpForm {

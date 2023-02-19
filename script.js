@@ -71,7 +71,7 @@ function addBookToLibrary(formData) {
 
 addBookForm.addEventListener('submit', (e) => {
 	const formData = new FormData(e.target);
-	e.target.classList.toggle("popUpForm-wrapper--hidden");
+	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
 	addBookToLibrary(formData);
 	displayBooks(myLibrary, libraryContainer);
 	e.preventDefault();
@@ -83,9 +83,9 @@ addBookForm.addEventListener('click', (e) => {
 
 addBookButton.addEventListener('click', () => {
 	addBookForm.reset();
-	addBookForm.classList.toggle("popUpForm-wrapper--hidden");
+	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
 })
 
 formWrapper.addEventListener('click', () => {
-	addBookForm.classList.add("popUpForm-wrapper--hidden")
+	formWrapper.classList.add("popUpForm-wrapper--hidden")
 })
