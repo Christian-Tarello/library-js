@@ -41,6 +41,8 @@ body {
 }
 
 .popUpForm-wrapper {
+    display: none;
+    background-color: #eeeeee22;
     position: fixed;
     height: 100%;
     width: 100%;
@@ -48,12 +50,8 @@ body {
     left: 0;
 }
 
-.popUpForm-wrapper:has(.popUpForm--hidden) {
-    display: none;
-}
-
-.popUpForm-wrapper:not(:has(.popUpForm--hidden)) {
-    background-color: #eeeeee22;
+.popUpForm--hidden {
+    display: initial;
 }
 
 .popUpForm {
@@ -69,10 +67,6 @@ body {
     flex-direction: column;
     gap: 1rem;
     border-radius: 8px;
-}
-
-.popUpForm--hidden {
-    display: none;
 }
 
 .popUpForm button,
