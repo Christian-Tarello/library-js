@@ -18,8 +18,8 @@ function Book(id, title, subtitle, author, pages, read) {
 Book.prototype.toDomElement = function () {
 	const template = `
 		<div class="bookCard-tags">
-			<button type="button" class="bookCard-tag">R</button>
-			<button type="button" class="bookCard-tag">D</button>
+			<button type="button" class="bookCard-tag" data-action="read">R</button>
+			<button type="button" class="bookCard-tag" data-action="delete">D</button>
 		</div>
 		<div class="bookCard-shape">
 			<div class="bookCard-readMarker">✔</div>
@@ -42,6 +42,7 @@ Book.prototype.toDomElement = function () {
 	`;
 	const element = document.createElement('div');
 	element.classList.add('bookCard');
+	element.dataset.id = this.id;
 	if (this.read) {
 		element.classList.add('bookCard--read');
 	}
@@ -56,10 +57,28 @@ function removeChildren(container) {
 	}
 }
 
+function readMarkerCallback(e) {
+	const bookElement = e.target.closest(".bookCard");
+	const id = Number(bookElement.dataset.id);
+	const bookObj = myLibrary.find(book => book.id === id);
+	bookObj.read = !bookObj.read;
+	if (bookObj.read) {
+		bookElement.classList.add("bookCard--read");
+	} else {
+		bookElement.classList.remove("bookCard--read");
+	}
+}
+
+
+
 function displayBooks(bookList, container) {
 	removeChildren(container);
 	bookList.forEach(bookObject => {
 		const domElement = bookObject.toDomElement();
+		const readButton = domElement.querySelector('.bookCard-tag[data-action = "read"]');
+		if (readButton) {
+			readButton.addEventListener("click", readMarkerCallback);
+		}
 		container.appendChild(domElement);
 	});
 }
