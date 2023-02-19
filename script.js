@@ -69,15 +69,25 @@ function readMarkerCallback(e) {
 	}
 }
 
-
+function deleteBook(e) {
+	const bookElement = e.target.closest(".bookCard");
+	const id = Number(bookElement.dataset.id);
+	const bookObjIndex = myLibrary.findIndex(book => book.id === id);
+	myLibrary.splice(bookObjIndex, 1);
+	bookElement.remove();
+}
 
 function displayBooks(bookList, container) {
 	removeChildren(container);
 	bookList.forEach(bookObject => {
 		const domElement = bookObject.toDomElement();
 		const readButton = domElement.querySelector('.bookCard-tag[data-action = "read"]');
+		const deleteButton = domElement.querySelector('.bookCard-tag[data-action = "delete"]');
 		if (readButton) {
 			readButton.addEventListener("click", readMarkerCallback);
+		}
+		if (deleteButton) {
+			deleteButton.addEventListener("click", deleteBook);
 		}
 		container.appendChild(domElement);
 	});
