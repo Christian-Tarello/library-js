@@ -15,13 +15,12 @@ function Book(title, subtitle, author, pages, read) {
 
 Book.prototype.toDomElement = function () {
 	const template = `
+		<div class="bookCard-tags">
+			<button type="button" class="bookCard-tag">R</button>
+			<button type="button" class="bookCard-tag">D</button>
+		</div>
 		<div class="bookCard-shape">
-			<div class="bookCard-spine">
-				<div class="bookCard-buttons">
-					<button type="button" class="bookCard-button">R</button>
-					<button type="button" class="bookCard-button">D</button>
-				</div>
-			</div>
+			<div class="bookCard-spine"></div>
 			<div class="bookCard-content">
 				<div class="bookCard-name">
 					<div class="bookCard-title">${this.title}</div>

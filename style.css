@@ -187,17 +187,20 @@ body {
     --bookCard-coverWidth: 10rem;
     --bookCard-coverHeight: 15rem;
     --bookCard-spineWidth: 2.5rem;
-    --bookCard-halfSpineWidth: calc(var(--bookCard-spineWidth) / 2);
-    --bookCard-quarterSpineWidth: calc(var(--bookCard-spineWidth) / 4);
+    --bookCard-tagWidth: 1.75rem;
+    --bookCard-tagHeight: 1.75rem; 
     --bookCard-edgeCoverHeight: 0.5rem;
     --bookCard-edgePagesHeight: 1.5rem;
     --bookCard-baseSpaceUnit: 0.5rem;
     --bookCard-bigSpaceUnit: calc(var(--bookCard-baseSpaceUnit) * 2);
     --bookCard-smallSpaceUnit: calc(var(--bookCard-baseSpaceUnit) / 2);
     font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .bookCard-shape {
+    position: relative;
     display: grid;
     grid-template-rows: var(--bookCard-coverHeight) auto;
     grid-template-columns: var(--bookCard-spineWidth) var(--bookCard-coverWidth);
@@ -224,7 +227,7 @@ body {
     height: var(--bookCard-edgePagesHeight);
     width: 92%; /* Sorry! Magic Number just looks good */
     border-radius: calc(var(--bookCard-edgePagesHeight) / 2) 0 0 calc(var(--bookCard-edgePagesHeight) / 2);
-    margin-left: var(--bookCard-quarterSpineWidth);
+    margin-left: calc(var(--bookCard-spineWidth) / 4);
     font-size: calc(var(--bookCard-edgePagesHeight) * 0.7);
     padding-right: 1em;
     color: #555;
@@ -272,32 +275,38 @@ body {
     overflow-wrap: anywhere;
 }
 
-.bookCard-buttons {
+.bookCard-tags {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     height: 100%;
     padding-top: var(--bookCard-bigSpaceUnit);
-    gap: var(--bookCard-quarterSpineWidth);
+    gap: var(--bookCard-smallSpaceUnit);
 }
 
-.bookCard-button {
+.bookCard-tag {
+    height: var(--bookCard-tagHeight);
+    width: var(--bookCard-tagWidth);
+    clip-path: polygon(0% 0%,100% 0%,80% 50%,100% 100%,0% 100%);
+    padding: 0 30% 0 0;
+    color: #555;
+    background-color: rgb(240, 240, 240);
+    border: 0px solid transparent;
+    border-left: #22222222 solid 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(var(--bookCard-quarterSpineWidth) * 3);
-    width: calc(var(--bookCard-quarterSpineWidth) * 3);
-    background-color: transparent;
-    border: 1px solid var(--bookCard-fontColor);
-    border-radius: 50%;
-    color: var(--bookCard-fontColor);
-    font-size: var(--bookCard-halfSpineWidth);
-    line-height: var(--bookCard-halfSpineWidth);
     cursor: pointer;
-    filter: opacity(40%);
-    transition: filter 100ms ease-out;
 }
 
-.bookCard-button:hover {
-    filter: opacity(100%);
+@media(hover: hover) {
+    .bookCard-tag {
+        transform: translateX(-60%);
+        transition: transform ease-in-out 100ms;
+    }
+
+    .bookCard-tag:hover {
+        transform: translateX(0%);
+    }
 }
