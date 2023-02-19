@@ -40,6 +40,9 @@ Book.prototype.toDomElement = function () {
 	`;
 	const element = document.createElement('div');
 	element.classList.add('bookCard');
+	if (this.read) {
+		element.classList.add('bookCard--read');
+	}
 	element.innerHTML = template;
 	return element;
 }
