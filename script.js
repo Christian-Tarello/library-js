@@ -4,8 +4,10 @@ const formWrapper = document.querySelector(".popUpForm-wrapper");
 const addBookButton = document.querySelector(".primaryHeader-navButton--addBook");
 
 let myLibrary = [];
+let idCount = 0;
 
-function Book(title, subtitle, author, pages, read) {
+function Book(id, title, subtitle, author, pages, read) {
+	this.id = id;
 	this.title = title;
 	this.subtitle = subtitle;
 	this.author = author;
@@ -62,8 +64,9 @@ function displayBooks(bookList, container) {
 	});
 }
 
-function addBookToLibrary(formData) {
+function addBookToLibrary(formData, id) {
 	const newBook = new Book(
+		id,
 		formData.get("title"),
 		formData.get("subtitle"),
 		formData.get("author"),
@@ -76,7 +79,8 @@ function addBookToLibrary(formData) {
 addBookForm.addEventListener('submit', (e) => {
 	const formData = new FormData(e.target);
 	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
-	addBookToLibrary(formData);
+	addBookToLibrary(formData, idCount);
+	idCount += 1;
 	displayBooks(myLibrary, libraryContainer);
 	e.preventDefault();
 });
