@@ -50,13 +50,15 @@ Book.prototype.toDomElement = function () {
 	return element;
 }
 
-
+// Helper Function
 function removeChildren(container) {
 	while (container.firstChild) {
 		container.removeChild(container.lastChild);
 	}
 }
 
+
+// Button Callbacks
 function readMarkerCallback(e) {
 	const bookElement = e.target.closest(".bookCard");
 	const id = Number(bookElement.dataset.id);
@@ -105,6 +107,11 @@ function addBookToLibrary(formData, id) {
 	myLibrary.push(newBook);
 }
 
+
+// Event Listeners
+// Add book Event Listeners
+
+// Form Submission logic
 addBookForm.addEventListener('submit', (e) => {
 	const formData = new FormData(e.target);
 	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
@@ -114,15 +121,18 @@ addBookForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 });
 
+// Prevent propagation on click with form
 addBookForm.addEventListener('click', (e) => {
 	e.stopPropagation();
 });
 
+// Toggle form button
 addBookButton.addEventListener('click', () => {
 	addBookForm.reset();
 	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
 })
 
+// Toggle off form if clicked outside of it
 formWrapper.addEventListener('click', () => {
 	formWrapper.classList.add("popUpForm-wrapper--hidden")
 })
