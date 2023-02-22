@@ -50,13 +50,6 @@ Book.prototype.toDomElement = function () {
 	return element;
 }
 
-// Helper Function
-function removeChildren(container) {
-	while (container.firstChild) {
-		container.removeChild(container.lastChild);
-	}
-}
-
 
 // Button Callbacks
 function readBook(e) {
@@ -96,13 +89,6 @@ function renderBookCard(bookObject, container) {
 	container.appendChild(domElement);
 }
 
-function displayBooks(bookList, container) {
-	removeChildren(container);
-	bookList.forEach(bookObject => {
-		renderBookCard(bookObject, container);
-	});
-}
-
 function getNewBookId() {
 	const id = idCount;
 	idCount += 1;
@@ -123,6 +109,19 @@ function formDataToBookObj(formData, id) {
 
 function addBookToLibrary(newBook) {
 	myLibrary.push(newBook);
+}
+
+function removeChildren(container) {
+	while (container.firstChild) {
+		container.removeChild(container.lastChild);
+	}
+}
+
+function displayBooks(bookList, container) {
+	removeChildren(container);
+	bookList.forEach(bookObject => {
+		renderBookCard(bookObject, container);
+	});
 }
 
 // Event Listeners
@@ -162,4 +161,12 @@ addBookButton.addEventListener('click', () => {
 // Toggle off form if clicked outside of it
 formWrapper.addEventListener('click', () => {
 	formWrapper.classList.add("popUpForm-wrapper--hidden")
+})
+
+// On load Event Listeners
+
+// Render all books into the DOM (No persistent storage implemented yet)
+window.addEventListener("load", (e) => {
+	displayBooks(myLibrary, libraryContainer);
+	console.log("Loaded all books stored");
 })
