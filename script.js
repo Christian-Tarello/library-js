@@ -59,7 +59,7 @@ function removeChildren(container) {
 
 
 // Button Callbacks
-function readMarkerCallback(e) {
+function readBook(e) {
 	const bookElement = e.target.closest(".bookCard");
 	const id = Number(bookElement.dataset.id);
 	const bookObj = myLibrary.find(book => book.id === id);
@@ -82,7 +82,7 @@ function deleteBook(e) {
 function bindBookCardButtons(bookCardElement) {
 	const readButton = bookCardElement.querySelector('.bookCard-tag[data-action = "read"]');
 	if (readButton) {
-		readButton.addEventListener("click", readMarkerCallback);
+		readButton.addEventListener("click", readBook);
 	}
 	const deleteButton = bookCardElement.querySelector('.bookCard-tag[data-action = "delete"]');
 	if (deleteButton) {
