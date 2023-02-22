@@ -18,8 +18,12 @@ function Book(id, title, subtitle, author, pages, read) {
 Book.prototype.toDomElement = function () {
 	const template = `
 		<div class="bookCard-tags">
-			<button type="button" class="bookCard-tag" data-action="read">R</button>
-			<button type="button" class="bookCard-tag" data-action="delete">D</button>
+			<button type="button" class="bookCard-tag" data-action="read">
+				<img src="./images/read.svg" title="Mark book as read">
+			</button>
+			<button type="button" class="bookCard-tag" data-action="delete">
+				<img src="./images/delete.svg" title="Delete book">
+			</button>
 		</div>
 		<div class="bookCard-shape">
 			<div class="bookCard-readMarker">✔</div>

@@ -296,14 +296,28 @@ body {
     cursor: pointer;
 }
 
+.bookCard-tag img {
+    height: min(calc(var(--bookCard-tagWidth) * 0.7), var(--bookCard-tagHeight));
+    width: min(calc(var(--bookCard-tagWidth) * 0.7), var(--bookCard-tagHeight));
+}
+
 @media(hover: hover) {
     .bookCard-tag {
         transform: translateX(-60%);
         transition: transform ease-in-out 100ms;
     }
 
+    .bookCard-tag img {
+        transform: scale(0%);
+        transition: transform ease-in-out 100ms;
+    }
+
     .bookCard-tag:hover {
         transform: translateX(0%);
+    }
+
+    .bookCard-tag:hover img {
+        transform: scale(100%);
     }
 }
 
