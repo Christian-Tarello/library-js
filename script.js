@@ -79,18 +79,22 @@ function deleteBook(e) {
 	bookElement.remove();
 }
 
+function bindBookCardButtons(bookCardElement) {
+	const readButton = bookCardElement.querySelector('.bookCard-tag[data-action = "read"]');
+	if (readButton) {
+		readButton.addEventListener("click", readMarkerCallback);
+	}
+	const deleteButton = bookCardElement.querySelector('.bookCard-tag[data-action = "delete"]');
+	if (deleteButton) {
+		deleteButton.addEventListener("click", deleteBook);
+	}
+}
+
 function displayBooks(bookList, container) {
 	removeChildren(container);
 	bookList.forEach(bookObject => {
 		const domElement = bookObject.toDomElement();
-		const readButton = domElement.querySelector('.bookCard-tag[data-action = "read"]');
-		const deleteButton = domElement.querySelector('.bookCard-tag[data-action = "delete"]');
-		if (readButton) {
-			readButton.addEventListener("click", readMarkerCallback);
-		}
-		if (deleteButton) {
-			deleteButton.addEventListener("click", deleteBook);
-		}
+		bindBookCardButtons(domElement);
 		container.appendChild(domElement);
 	});
 }
@@ -106,7 +110,6 @@ function addBookToLibrary(formData, id) {
 		);
 	myLibrary.push(newBook);
 }
-
 
 // Event Listeners
 // Add book Event Listeners
