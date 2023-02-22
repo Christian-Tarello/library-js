@@ -126,11 +126,10 @@ function addBookToLibrary(newBook) {
 }
 
 // Event Listeners
-// Add book Event Listeners
+// Add book form Event Listeners
 
 // Form Submission logic
 addBookForm.addEventListener('submit', (e) => {
-	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
 	const formData = new FormData(e.target);
 	const id = getNewBookId();
 	const newBook = formDataToBookObj(formData, id);
@@ -139,16 +138,26 @@ addBookForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 });
 
+// Hide Form After Submission
+addBookForm.addEventListener('submit', () => {
+	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
+	addBookForm.reset();
+})
+
 // Prevent propagation on click with form
 addBookForm.addEventListener('click', (e) => {
 	e.stopPropagation();
 });
 
+// Add Book Button Event Listeners
+
 // Toggle form button
 addBookButton.addEventListener('click', () => {
-	addBookForm.reset();
 	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
+	addBookForm.reset();
 })
+
+// Form Wrapper Event Listeners
 
 // Toggle off form if clicked outside of it
 formWrapper.addEventListener('click', () => {
