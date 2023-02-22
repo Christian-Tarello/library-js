@@ -90,12 +90,16 @@ function bindBookCardButtons(bookCardElement) {
 	}
 }
 
+function renderBookCard(bookObject, container) {
+	const domElement = bookObject.toDomElement();
+	bindBookCardButtons(domElement);
+	container.appendChild(domElement);
+}
+
 function displayBooks(bookList, container) {
 	removeChildren(container);
 	bookList.forEach(bookObject => {
-		const domElement = bookObject.toDomElement();
-		bindBookCardButtons(domElement);
-		container.appendChild(domElement);
+		renderBookCard(bookObject, container);
 	});
 }
 
