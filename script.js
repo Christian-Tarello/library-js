@@ -103,7 +103,13 @@ function displayBooks(bookList, container) {
 	});
 }
 
-function addBookToLibrary(formData, id) {
+function getNewBookId() {
+	const id = idCount;
+	idCount += 1;
+	return id;
+}
+
+function formDataToBookObj(formData, id) {
 	const newBook = new Book(
 		id,
 		formData.get("title"),
@@ -112,6 +118,10 @@ function addBookToLibrary(formData, id) {
 		formData.get("pages"),
 		(formData.get("isRead") != null)
 		);
+	return newBook;
+}
+
+function addBookToLibrary(newBook) {
 	myLibrary.push(newBook);
 }
 
@@ -120,11 +130,12 @@ function addBookToLibrary(formData, id) {
 
 // Form Submission logic
 addBookForm.addEventListener('submit', (e) => {
-	const formData = new FormData(e.target);
 	formWrapper.classList.toggle("popUpForm-wrapper--hidden");
-	addBookToLibrary(formData, idCount);
-	idCount += 1;
-	displayBooks(myLibrary, libraryContainer);
+	const formData = new FormData(e.target);
+	const id = getNewBookId();
+	const newBook = formDataToBookObj(formData, id);
+	addBookToLibrary(newBook);
+	renderBookCard(newBook, libraryContainer);
 	e.preventDefault();
 });
 
