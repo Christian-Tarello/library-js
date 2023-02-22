@@ -6,12 +6,13 @@ const addBookButton = document.querySelector(".primaryHeader-navButton--addBook"
 let myLibrary = [];
 let idCount = 0;
 
-function Book(id, title, subtitle, author, pages, read) {
+function Book(id, title, subtitle, author, pages, filePath, read) {
 	this.id = id;
 	this.title = title;
 	this.subtitle = subtitle;
 	this.author = author;
 	this.pages = pages;
+	this.filePath = filePath;
 	this.read = read;
 }
 
@@ -29,10 +30,10 @@ Book.prototype.toDomElement = function () {
 			<div class="bookCard-readMarker">✔</div>
 			<div class="bookCard-spine"></div>
 			<div class="bookCard-content">
-				<div class="bookCard-name">
+				<a class="bookCard-name" href="${this.filePath}" target="_blank" rel="noopener noreferrer">
 					<div class="bookCard-title">${this.title}</div>
 					<div class="bookCard-subtitle">${this.subtitle}</div>
-				</div>
+				</a>
 				<div class="bookCard-author">By ${this.author}</div>
 			</div>
 			<div class="bookCard-edge">
@@ -106,6 +107,7 @@ function formDataToBookObj(formData, id) {
 		formData.get("subtitle"),
 		formData.get("author"),
 		formData.get("pages"),
+		formData.get("path"),
 		(formData.get("isRead") != null)
 		);
 	return newBook;

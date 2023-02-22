@@ -249,6 +249,17 @@ body {
     grid-area: name;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.bookCard-name[href=""] {
+    pointer-events: none;
+    cursor: default;
+}
+
+.bookCard-name:hover {
+    text-decoration: underline;
 }
 
 .bookCard-title {
