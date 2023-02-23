@@ -174,5 +174,5 @@ formWrapper.addEventListener('click', () => {
 // Render all books into the DOM (No persistent storage implemented yet)
 window.addEventListener("load", (e) => {
 	displayBooks(myLibrary, libraryContainer);
-	console.log("Loaded all books stored");
+	console.log("Loaded all stored books");
 })
