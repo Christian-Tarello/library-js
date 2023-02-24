@@ -27,7 +27,7 @@
                 <ul class="popUpForm-fieldList">
                     <li class="popUpForm-field">
                         <label for="bookTitle">Title:</label>
-                        <input id="bookTitle" name="title" type="text">
+                        <input id="bookTitle" name="title" type="text" required>
                     </li>
                     <li class="popUpForm-field">
                         <label for="bookSubtitle">Subtitle:</label>
@@ -35,11 +35,11 @@
                     </li>
                     <li class="popUpForm-field">
                         <label for="bookAuthor">Author/Studio name:</label>
-                        <input id="bookAuthor" name="author" type="text">
+                        <input id="bookAuthor" name="author" type="text" required>
                     </li>
                     <li class="popUpForm-field">
                         <label for="bookPages">Pages in book:</label>
-                        <input id="bookPages" name="pages" type="number" >
+                        <input id="bookPages" name="pages" type="number" min="1" required>
                     </li>
                 </ul>
             </fieldset>
