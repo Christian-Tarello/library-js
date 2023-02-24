@@ -93,6 +93,23 @@ body {
     overflow-y: auto;
 }
 
+.popUpForm-container::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+.popUpForm-container::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border: 0.25rem solid transparent;
+    border-radius: 0.5rem;
+}
+
+@supports (scrollbar-color: red blue) {
+    .popUpForm-container {
+        scrollbar-color: #333 transparent;
+        scrollbar-width: thin;
+    }
+}
+
 .popUpForm-fieldset {
     background-color: #444;
     position: relative;
