@@ -163,8 +163,8 @@ body {
 }
 
 .cardsGrid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
     gap: 1.5rem;
     padding: 2rem;
 }
