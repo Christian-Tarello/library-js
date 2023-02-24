@@ -18,6 +18,9 @@ body {
     display: flex;
     padding: 1rem 2rem;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .primaryHeader-title {
@@ -47,6 +50,7 @@ body {
     width: 100%;
     top: 0;
     left: 0;
+    z-index: 2;
 }
 
 .popUpForm-wrapper--hidden {
