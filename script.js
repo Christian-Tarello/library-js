@@ -20,8 +20,10 @@ class Book {
 		Book._counter = (Book._counter || 0) + 1;
 		return Book._counter;
 	}
+}
 
-	toDomElement() {
+class BookUtils {
+	static toDomElement(bookObj) {
 		const template = `
 		<div class="bookCard-tags">
 			<button type="button" class="bookCard-tag" data-action="read">
@@ -35,16 +37,16 @@ class Book {
 			<div class="bookCard-readMarker">✔</div>
 			<div class="bookCard-spine"></div>
 			<div class="bookCard-content">
-				<a class="bookCard-name" href="${this.filePath}" target="_blank" rel="noopener noreferrer">
-					<div class="bookCard-title">${this.title}</div>
-					<div class="bookCard-subtitle">${this.subtitle}</div>
+				<a class="bookCard-name" href="${bookObj.filePath}" target="_blank" rel="noopener noreferrer">
+					<div class="bookCard-title">${bookObj.title}</div>
+					<div class="bookCard-subtitle">${bookObj.subtitle}</div>
 				</a>
-				<div class="bookCard-author">By ${this.author}</div>
+				<div class="bookCard-author">By ${bookObj.author}</div>
 			</div>
 			<div class="bookCard-edge">
 				<div class="bookCard-edgeCover"></div>
 				<div class="bookCard-edgePages">
-					<div class="bookCard-pages">${this.pages} pages</div>
+					<div class="bookCard-pages">${bookObj.pages} pages</div>
 				</div>
 				<div class="bookCard-edgeCover"></div>
 			</div>
@@ -52,12 +54,24 @@ class Book {
 	`;
 	const element = document.createElement('div');
 	element.classList.add('bookCard');
-	element.dataset.id = this.id;
-	if (this.read) {
+	element.dataset.id = bookObj.id;
+	if (bookObj.read) {
 		element.classList.add('bookCard--read');
 	}
 	element.innerHTML = template;
 	return element;
+	}
+
+	static formToBookObj(formData) {
+		const newBook = new Book(
+			formData.get("title"),
+			formData.get("subtitle"),
+			formData.get("author"),
+			formData.get("pages"),
+			formData.get("path"),
+			(formData.get("isRead") != null)
+			);
+		return newBook;
 	}
 }
 
@@ -89,51 +103,39 @@ const myLibrary = new BookCollection([]);
 
 // Button Callbacks
 function readBook(e) {
-	const bookElement = e.target.closest(".bookCard");
-	const id = Number(bookElement.dataset.id);
+	const element = e.target.closest(".bookCard");
+	const id = Number(element.dataset.id);
 	const bookObj = myLibrary.findBookById(id);
 	bookObj.read = !bookObj.read;
 	if (bookObj.read) {
-		bookElement.classList.add("bookCard--read");
+		element.classList.add("bookCard--read");
 	} else {
-		bookElement.classList.remove("bookCard--read");
+		element.classList.remove("bookCard--read");
 	}
 }
 
 function deleteBook(e) {
-	const bookElement = e.target.closest(".bookCard");
-	const id = Number(bookElement.dataset.id);
+	const element = e.target.closest(".bookCard");
+	const id = Number(element.dataset.id);
 	myLibrary.deleteBookById(id);
-	bookElement.remove();
+	element.remove();
 }
 
-function bindBookCardButtons(bookCardElement) {
-	const readButton = bookCardElement.querySelector('.bookCard-tag[data-action = "read"]');
+function bindBookCardButtons(element) {
+	const readButton = element.querySelector('.bookCard-tag[data-action = "read"]');
 	if (readButton) {
 		readButton.addEventListener("click", readBook);
 	}
-	const deleteButton = bookCardElement.querySelector('.bookCard-tag[data-action = "delete"]');
+	const deleteButton = element.querySelector('.bookCard-tag[data-action = "delete"]');
 	if (deleteButton) {
 		deleteButton.addEventListener("click", deleteBook);
 	}
 }
 
 function renderBookCard(bookObject, container) {
-	const domElement = bookObject.toDomElement();
+	const domElement = BookUtils.toDomElement(bookObject);
 	bindBookCardButtons(domElement);
 	container.appendChild(domElement);
-}
-
-function formDataToBookObj(formData) {
-	const newBook = new Book(
-		formData.get("title"),
-		formData.get("subtitle"),
-		formData.get("author"),
-		formData.get("pages"),
-		formData.get("path"),
-		(formData.get("isRead") != null)
-		);
-	return newBook;
 }
 
 function removeChildren(container) {
@@ -155,7 +157,7 @@ function displayBooks(bookList, container) {
 // Form Submission logic
 addBookForm.addEventListener('submit', (e) => {
 	const formData = new FormData(e.target);
-	const newBook = formDataToBookObj(formData);
+	const newBook = BookUtils.formToBookObj(formData);
 	myLibrary.addBook(newBook);
 	renderBookCard(newBook, libraryContainer);
 	e.preventDefault();
