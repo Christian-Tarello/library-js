@@ -6,18 +6,19 @@ const addBookButton = document.querySelector(".primaryHeader-navButton--addBook"
 let myLibrary = [];
 let idCount = 0;
 
-function Book(id, title, subtitle, author, pages, filePath, read) {
-	this.id = id;
-	this.title = title;
-	this.subtitle = subtitle;
-	this.author = author;
-	this.pages = pages;
-	this.filePath = filePath;
-	this.read = read;
-}
+class Book {
+	constructor(id, title, subtitle, author, pages, filePath, read) {
+		this.id = id;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.author = author;
+		this.pages = pages;
+		this.filePath = filePath;
+		this.read = read;
+	}
 
-Book.prototype.toDomElement = function () {
-	const template = `
+	toDomElement() {
+		const template = `
 		<div class="bookCard-tags">
 			<button type="button" class="bookCard-tag" data-action="read">
 				<img src="./images/read.svg" title="Mark book as read">
@@ -53,8 +54,8 @@ Book.prototype.toDomElement = function () {
 	}
 	element.innerHTML = template;
 	return element;
+	}
 }
-
 
 // Button Callbacks
 function readBook(e) {
