@@ -1,10 +1,4 @@
-const libraryContainer = document.querySelector(".cardsGrid");
-const addBookForm = document.querySelector(".popUpForm");
-const formWrapper = document.querySelector(".popUpForm-wrapper");
-const addBookButton = document.querySelector(".primaryHeader-navButton--addBook");
-
-let myLibrary = [];
-let idCount = 0;
+/* eslint-disable max-classes-per-file */
 
 class Book {
 	constructor(id, title, subtitle, author, pages, filePath, read) {
@@ -57,11 +51,38 @@ class Book {
 	}
 }
 
+class BookCollection {
+	constructor(books) {
+		this.books = books;
+	}
+
+	addBook(book) {
+		this.books.push(book);
+	}
+
+	findBookById(id) {
+		return this.books.find(book => book.id === id);
+	}
+
+	deleteBookById(id) {
+		const index = this.books.findIndex(book => book.id === id);
+		return this.books.splice(index, 1)[0];
+	}
+}
+
+const libraryContainer = document.querySelector(".cardsGrid");
+const addBookForm = document.querySelector(".popUpForm");
+const formWrapper = document.querySelector(".popUpForm-wrapper");
+const addBookButton = document.querySelector(".primaryHeader-navButton--addBook");
+
+const myLibrary = new BookCollection([]);
+let idCount = 0;
+
 // Button Callbacks
 function readBook(e) {
 	const bookElement = e.target.closest(".bookCard");
 	const id = Number(bookElement.dataset.id);
-	const bookObj = myLibrary.find(book => book.id === id);
+	const bookObj = myLibrary.findBookById(id);
 	bookObj.read = !bookObj.read;
 	if (bookObj.read) {
 		bookElement.classList.add("bookCard--read");
@@ -73,8 +94,7 @@ function readBook(e) {
 function deleteBook(e) {
 	const bookElement = e.target.closest(".bookCard");
 	const id = Number(bookElement.dataset.id);
-	const bookObjIndex = myLibrary.findIndex(book => book.id === id);
-	myLibrary.splice(bookObjIndex, 1);
+	myLibrary.deleteBookById(id);
 	bookElement.remove();
 }
 
@@ -114,10 +134,6 @@ function formDataToBookObj(formData, id) {
 	return newBook;
 }
 
-function addBookToLibrary(newBook) {
-	myLibrary.push(newBook);
-}
-
 function removeChildren(container) {
 	while (container.firstChild) {
 		container.removeChild(container.lastChild);
@@ -139,7 +155,7 @@ addBookForm.addEventListener('submit', (e) => {
 	const formData = new FormData(e.target);
 	const id = getNewBookId();
 	const newBook = formDataToBookObj(formData, id);
-	addBookToLibrary(newBook);
+	myLibrary.addBook(newBook);
 	renderBookCard(newBook, libraryContainer);
 	e.preventDefault();
 });
@@ -174,6 +190,6 @@ formWrapper.addEventListener('click', () => {
 
 // Render all books into the DOM (No persistent storage implemented yet)
 window.addEventListener("load", (e) => {
-	displayBooks(myLibrary, libraryContainer);
+	displayBooks(myLibrary.books, libraryContainer);
 	console.log("Loaded all stored books");
 })
