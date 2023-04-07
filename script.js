@@ -1,14 +1,24 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-classes-per-file */
 
 class Book {
-	constructor(id, title, subtitle, author, pages, filePath, read) {
-		this.id = id;
+	constructor(title, subtitle, author, pages, filePath, read) {
+		this._id = Book.counter;
 		this.title = title;
 		this.subtitle = subtitle;
 		this.author = author;
 		this.pages = pages;
 		this.filePath = filePath;
 		this.read = read;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	static get counter() {
+		Book._counter = (Book._counter || 0) + 1;
+		return Book._counter;
 	}
 
 	toDomElement() {
@@ -76,7 +86,6 @@ const formWrapper = document.querySelector(".popUpForm-wrapper");
 const addBookButton = document.querySelector(".primaryHeader-navButton--addBook");
 
 const myLibrary = new BookCollection([]);
-let idCount = 0;
 
 // Button Callbacks
 function readBook(e) {
@@ -115,15 +124,8 @@ function renderBookCard(bookObject, container) {
 	container.appendChild(domElement);
 }
 
-function getNewBookId() {
-	const id = idCount;
-	idCount += 1;
-	return id;
-}
-
-function formDataToBookObj(formData, id) {
+function formDataToBookObj(formData) {
 	const newBook = new Book(
-		id,
 		formData.get("title"),
 		formData.get("subtitle"),
 		formData.get("author"),
@@ -153,8 +155,7 @@ function displayBooks(bookList, container) {
 // Form Submission logic
 addBookForm.addEventListener('submit', (e) => {
 	const formData = new FormData(e.target);
-	const id = getNewBookId();
-	const newBook = formDataToBookObj(formData, id);
+	const newBook = formDataToBookObj(formData);
 	myLibrary.addBook(newBook);
 	renderBookCard(newBook, libraryContainer);
 	e.preventDefault();
